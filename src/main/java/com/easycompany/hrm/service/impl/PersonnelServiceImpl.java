@@ -66,7 +66,7 @@ public class PersonnelServiceImpl implements PersonnelService {
         if (personnel.getContract() == null) {
             throw new ContractException("The person you selected is not an employee");
         }
-        if (personnel.getContract().getEndDate() == ContractConvertor.getEndOfTime()) {
+        if (personnel.getContract().getEndDate().equals(ContractConvertor.getEndOfTime())) {
             StatusChangeScheduler scheduler = new StatusChangeScheduler(Status.EMPLOYEE, endDate);
             scheduler.startSchedulerChangeStatusToFired();
             personnel.getContract().setEndDate(endDate);

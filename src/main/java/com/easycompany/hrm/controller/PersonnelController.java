@@ -62,7 +62,7 @@ public class PersonnelController {
     public ResponseEntity<String> updatePersonnelJobTitle(@RequestParam Integer personnelId, JobTitle jobTitle) {
         personnelService.changeJobTitle(personnelId, jobTitle);
 
-        return ResponseEntity.ok("Personnel with id" + personnelId + " has been successfully updated with the " +
+        return ResponseEntity.ok("Personnel with id " + personnelId + " has been successfully updated with the " +
                 "job title " + jobTitle);
     }
 
