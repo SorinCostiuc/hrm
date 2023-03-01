@@ -48,7 +48,7 @@ public class ContractController {
                 "with " + contractEndDate + " end date.");
     }
 
-    @PostMapping("/updateContractType")
+    @PutMapping("/updateContractType")
     public ResponseEntity<String> updateContractType(@RequestParam Integer contractId, ContractType contractType) {
         contractService.updateContractType(contractId, contractType);
 
