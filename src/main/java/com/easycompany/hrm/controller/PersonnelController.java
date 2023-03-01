@@ -58,7 +58,7 @@ public class PersonnelController {
         return ResponseEntity.ok(personnelService.findByCnp(cnp));
     }
 
-    @PostMapping("/updatePersonnelJobTitle")
+    @PutMapping("/updatePersonnelJobTitle")
     public ResponseEntity<String> updatePersonnelJobTitle(@RequestParam Integer personnelId, JobTitle jobTitle) {
         personnelService.changeJobTitle(personnelId, jobTitle);
 
@@ -80,7 +80,7 @@ public class PersonnelController {
         return ResponseEntity.ok(personnelService.firePersonnel(personnelId, endDate));
     }
 
-    @PostMapping("/updatePersonnel")
+    @PutMapping("/updatePersonnel")
     public ResponseEntity<String> updatePersonnel(@RequestParam Integer personnelId, String personnelName, Long personnelCnp,
                                                   String personnelAddress, @Email String personnelEmail, String personnelPhoneNumber) {
         personnelService.updatePersonnel(personnelId, personnelName, personnelCnp, personnelAddress, personnelEmail

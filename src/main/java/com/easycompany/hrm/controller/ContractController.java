@@ -7,6 +7,7 @@ import com.easycompany.hrm.model.ContractType;
 import com.easycompany.hrm.service.ContractService;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,10 @@ public class ContractController {
         return ResponseEntity.ok(contractService.findContractById(contractId));
     }
 
-    @PostMapping("/updateContractEndDate")
+    @PutMapping("/updateContractEndDate")
     public ResponseEntity<String> updateContractEndDate(
             @RequestParam Integer contractId,
-            @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate contractEndDate) {
+            @RequestParam @NotNull @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate contractEndDate) {
         contractService.updateContractEndDate(contractId, contractEndDate);
 
         return ResponseEntity.ok("Personnel with id " + contractId + " has been successfully updated " +
