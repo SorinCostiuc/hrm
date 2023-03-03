@@ -28,51 +28,51 @@ public class PersonnelController {
         this.personnelService = personnelService;
     }
 
-    @PostMapping("/createNewPersonnel")
-    public ResponseEntity<PersonnelInfoDto> createNewPersonnel(@RequestBody @Valid PersonnelCreateDto personnelCreateDto) {
+    @PostMapping("/create")
+    public ResponseEntity<PersonnelInfoDto> createPersonnel(@RequestBody @Valid PersonnelCreateDto personnelCreateDto) {
 
         return ResponseEntity.ok(personnelService.createNewPersonnel(personnelCreateDto));
     }
 
-    @GetMapping("/findPersonnelByName")
-    public ResponseEntity<List<PersonnelInfoDto>> getPersonnelByName(@RequestParam String name) {
+    @GetMapping("/name-search")
+    public ResponseEntity<List<PersonnelInfoDto>> findByName(@RequestParam String name) {
 
         return ResponseEntity.ok(personnelService.findByName(name));
     }
 
-    @GetMapping("/findPersonnelByStatus")
-    public ResponseEntity<List<PersonnelShortInfoDto>> getPersonnelByStatus(@RequestParam Status status) {
+    @GetMapping("/status-search")
+    public ResponseEntity<List<PersonnelShortInfoDto>> findByStatus(@RequestParam Status status) {
 
         return ResponseEntity.ok(personnelService.findByStatus(status));
     }
 
-    @GetMapping("/findPersonnelByJobTitle")
-    public ResponseEntity<List<PersonnelShortInfoDto>> getPersonnelByJobTitle(@RequestParam JobTitle jobTitle) {
+    @GetMapping("/job-title-search")
+    public ResponseEntity<List<PersonnelShortInfoDto>> findByJobTitle(@RequestParam JobTitle jobTitle) {
 
         return ResponseEntity.ok(personnelService.findByJobTitle(jobTitle));
     }
 
-    @GetMapping("/findPersonnelByCnp")
-    public ResponseEntity<PersonnelInfoDto> getPersonnelByCnp(@RequestParam Long cnp) {
+    @GetMapping("/cnp-search")
+    public ResponseEntity<PersonnelInfoDto> findByCnp(@RequestParam Long cnp) {
 
         return ResponseEntity.ok(personnelService.findByCnp(cnp));
     }
 
-    @PutMapping("/updatePersonnelJobTitle")
-    public ResponseEntity<String> updatePersonnelJobTitle(@RequestParam Integer personnelId, JobTitle jobTitle) {
+    @PutMapping("/job-title-change")
+    public ResponseEntity<String> updateJobTitle(@RequestParam Integer personnelId, JobTitle jobTitle) {
         personnelService.changeJobTitle(personnelId, jobTitle);
 
         return ResponseEntity.ok("Personnel with id " + personnelId + " has been successfully updated with the " +
                 "job title " + jobTitle);
     }
 
-    @PostMapping("/employPersonnel")
+    @PostMapping("/employ")
     public ResponseEntity<PersonnelInfoDto> employPersonnel(@RequestParam Integer personnelId, Integer contractId) {
 
         return ResponseEntity.ok(personnelService.employPersonnel(personnelId, contractId));
     }
 
-    @PostMapping("/firePersonnel")
+    @PostMapping("/fire")
     public ResponseEntity<PersonnelInfoDto> firePersonnel(
             @RequestParam Integer personnelId,
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate endDate) {
@@ -80,7 +80,7 @@ public class PersonnelController {
         return ResponseEntity.ok(personnelService.firePersonnel(personnelId, endDate));
     }
 
-    @PutMapping("/updatePersonnel")
+    @PutMapping("/info")
     public ResponseEntity<String> updatePersonnel(@RequestParam Integer personnelId, String personnelName, Long personnelCnp,
                                                   String personnelAddress, @Email String personnelEmail, String personnelPhoneNumber) {
         personnelService.updatePersonnel(personnelId, personnelName, personnelCnp, personnelAddress, personnelEmail
@@ -89,8 +89,8 @@ public class PersonnelController {
         return ResponseEntity.ok("Personnel with id " + personnelId + " has been successfully updated");
     }
 
-    @GetMapping("/findPersonnelById")
-    public ResponseEntity<PersonnelInfoDto> getPersonnelById(@RequestParam Integer personnelId) {
+    @GetMapping("/id-search")
+    public ResponseEntity<PersonnelInfoDto> findById(@RequestParam Integer personnelId) {
 
         return ResponseEntity.ok(personnelService.findById(personnelId));
     }

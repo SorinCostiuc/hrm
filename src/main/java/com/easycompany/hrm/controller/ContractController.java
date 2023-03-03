@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hrm/v1/contract")
+@RequestMapping("/hrm/v1/contracts")
 @ControllerAdvice
 public class ContractController {
     private final ContractService contractService;
@@ -26,20 +26,20 @@ public class ContractController {
         this.contractService = contractService;
     }
 
-    @PostMapping("/createNewContract")
-    public ResponseEntity<ContractInfoDto> createNewContract(@RequestBody @Valid @JsonFormat ContractCreateDto contractCreateDto) {
+    @PostMapping("/create")
+    public ResponseEntity<ContractInfoDto> createContract(@RequestBody @Valid @JsonFormat ContractCreateDto contractCreateDto) {
 
         return ResponseEntity.ok(contractService.createNewContract(contractCreateDto));
     }
 
-    @GetMapping("/findContractById")
-    public ResponseEntity<ContractInfoDto> getContractById(@RequestParam Integer contractId) {
+    @GetMapping("/id-search")
+    public ResponseEntity<ContractInfoDto> findById(@RequestParam Integer contractId) {
 
         return ResponseEntity.ok(contractService.findContractById(contractId));
     }
 
-    @PutMapping("/updateContractEndDate")
-    public ResponseEntity<String> updateContractEndDate(
+    @PutMapping("/end-date")
+    public ResponseEntity<String> updateEndDate(
             @RequestParam Integer contractId,
             @RequestParam @NotNull @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate contractEndDate) {
         contractService.updateContractEndDate(contractId, contractEndDate);
@@ -48,32 +48,32 @@ public class ContractController {
                 "with " + contractEndDate + " end date.");
     }
 
-    @PutMapping("/updateContractType")
-    public ResponseEntity<String> updateContractType(@RequestParam Integer contractId, ContractType contractType) {
+    @PutMapping("/type")
+    public ResponseEntity<String> updateType(@RequestParam Integer contractId, ContractType contractType) {
         contractService.updateContractType(contractId, contractType);
 
         return ResponseEntity.ok("Personnel with id " + contractId + " has been successfully updated " +
                 "with " + contractType + " contract.");
     }
 
-    @GetMapping("/findContractByStartDate")
-    public ResponseEntity<List<ContractShortInfoDto>> findContractByStartDate(
+    @GetMapping("/start-date-search")
+    public ResponseEntity<List<ContractShortInfoDto>> findByStartDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate contractStartDate) {
 
         return ResponseEntity.ok(contractService.findContractByStartDate(contractStartDate));
     }
 
-    @GetMapping("/findContractByEndDate")
-    public ResponseEntity<List<ContractShortInfoDto>> findContractByEndDate(
+    @GetMapping("/end-date-search")
+    public ResponseEntity<List<ContractShortInfoDto>> findByEndDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate contractEndDate) {
 
         return ResponseEntity.ok(contractService.findContractByEndDate(contractEndDate));
     }
 
-    @GetMapping("/findContractByContractType")
-    public ResponseEntity<List<ContractShortInfoDto>> findContractByContractType(@RequestParam ContractType contractType) {
+    @GetMapping("/type")
+    public ResponseEntity<List<ContractShortInfoDto>> findByType(@RequestParam ContractType contractType) {
 
-        return ResponseEntity.ok(contractService.findContractByContractType(contractType));
+        return ResponseEntity.ok(contractService.findByType(contractType));
     }
 
 }

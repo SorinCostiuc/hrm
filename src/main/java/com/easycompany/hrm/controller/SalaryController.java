@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/hrm/v1/salary")
+@RequestMapping("/hrm/v1/salaries")
 @ControllerAdvice
 public class SalaryController {
     private final SalaryService salaryService;
@@ -25,13 +25,13 @@ public class SalaryController {
         this.salaryService = salaryService;
     }
 
-//    @PostMapping("/createNewSalary")
+//    @PostMapping("/create")
 //    public ResponseEntity<SalaryInfoDto> createNewSalary(@RequestBody @Valid @JsonFormat SalaryCreateDto salaryCreateDto) {
 //
 //        return ResponseEntity.ok(salaryService.createNewSalary(salaryCreateDto));
 //    }
 
-    @PostMapping("/createNewSalary")
+    @PostMapping("/create")
     public ResponseEntity<SalaryInfoDto> createNewSalary(
             @RequestParam Integer personnelId, Integer totalWorkedHours,
             @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate receivedDate) {
@@ -39,70 +39,70 @@ public class SalaryController {
         return ResponseEntity.ok(salaryService.createNewSalary(personnelId, totalWorkedHours, receivedDate));
     }
 
-    @GetMapping("/findMaxSalary")
+    @GetMapping("/max")
     public ResponseEntity<List<SalaryInfoDto>> findMaxSalary() {
         return ResponseEntity.ok(salaryService.findMaxSalary());
     }
 
-    @GetMapping("/findMinSalary")
+    @GetMapping("/min")
     public ResponseEntity<List<SalaryInfoDto>> findMinSalary() {
         return ResponseEntity.ok(salaryService.findMinSalary());
     }
 
-    @GetMapping("/findSalaryByDate")
+    @GetMapping("/date-search")
     public ResponseEntity<List<SalaryInfoDto>> findSalaryByDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate date) {
 
         return ResponseEntity.ok(salaryService.findSalaryByDate(date));
     }
 
-    @GetMapping("/findMaxSalaryByDate")
+    @GetMapping("/max-from-date")
     public ResponseEntity<List<SalaryInfoDto>> findMaxSalaryByDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate date) {
 
         return ResponseEntity.ok(salaryService.findMaxSalaryByDate(date));
     }
 
-    @GetMapping("/findMinSalaryByDate")
+    @GetMapping("/min-from-date")
     public ResponseEntity<List<SalaryInfoDto>> findMinSalaryByDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate date) {
 
         return ResponseEntity.ok(salaryService.findMinSalaryByDate(date));
     }
 
-    @GetMapping("/findSalaryByPersonnelId")
+    @GetMapping("/personnel-id-search")
     public ResponseEntity<List<SalaryShortInfoDto>> findSalaryByPersonnelId(@RequestParam Integer personnelId) {
 
         return ResponseEntity.ok(salaryService.findSalaryByPersonnelId(personnelId));
     }
 
-    @GetMapping("/findSalaryByMaxWorkedHours")
+    @GetMapping("/max-hours-search")
     public ResponseEntity<List<SalaryInfoDto>> findSalaryByMaxWorkedHours() {
 
         return ResponseEntity.ok(salaryService.findSalaryByMaxWorkedHours());
     }
 
-    @GetMapping("/findSalaryByMinWorkedHours")
+    @GetMapping("/min-hours-search")
     public ResponseEntity<List<SalaryInfoDto>> findSalaryByMinWorkedHours() {
 
         return ResponseEntity.ok(salaryService.findSalaryByMinWorkedHours());
     }
 
-    @GetMapping("/findSalaryByMaxWorkedHoursByDate")
+    @GetMapping("/max-hours-date-search")
     public ResponseEntity<List<SalaryInfoDto>> findSalaryByMaxWorkedHoursByDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate date) {
 
         return ResponseEntity.ok(salaryService.findSalaryByMaxWorkedHoursByDate(date));
     }
 
-    @GetMapping("/findSalaryByMinWorkedHoursByDate")
+    @GetMapping("/min-hours-date-search")
     public ResponseEntity<List<SalaryInfoDto>> findSalaryByMinWorkedHoursByDate(
             @RequestParam @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy") LocalDate date) {
 
         return ResponseEntity.ok(salaryService.findSalaryByMinWorkedHoursByDate(date));
     }
 
-    @PutMapping("/updateSalary")
+    @PutMapping("/increase")
     public ResponseEntity<String> updateSalary(@RequestParam JobTitle jobTitle, Double amount) {
         salaryService.updateSalary(jobTitle, amount);
 

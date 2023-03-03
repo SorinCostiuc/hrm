@@ -21,5 +21,5 @@ public interface ContractService {
 
     List<ContractShortInfoDto> findContractByEndDate(LocalDate endDate);
 
-    List<ContractShortInfoDto> findContractByContractType(ContractType contractType);
+    List<ContractShortInfoDto> findByType(ContractType contractType);
 }

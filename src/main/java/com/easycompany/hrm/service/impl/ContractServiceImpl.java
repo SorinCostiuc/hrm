@@ -93,7 +93,7 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ContractShortInfoDto> findContractByContractType(ContractType contractType) {
+    public List<ContractShortInfoDto> findByType(ContractType contractType) {
 
         return contractRepository.findByContractType(contractType).stream().map(ContractConvertor::entityToShortInfoDto)
                 .collect(Collectors.collectingAndThen(
