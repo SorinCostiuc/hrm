@@ -15,6 +15,7 @@ import com.easycompany.hrm.repository.SalaryRepository;
 import com.easycompany.hrm.service.SalaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Transactional
 public class SalaryServiceImpl implements SalaryService {
     private final SalaryRepository salaryRepository;
     private final PersonnelRepository personnelRepository;
@@ -64,7 +66,9 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findSalaryByDate(LocalDate date) {
+
         return salaryRepository.findAll().stream()
                 .filter(salary -> salary.getReceiveDate().equals(date))
                 .map(SalaryConvertor::entityToInfoDto)
@@ -79,6 +83,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findMaxSalaryByDate(LocalDate date) {
         try {
             return salaryRepository.findSalariesByReceiveDate(date).stream()
@@ -96,6 +101,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findMinSalaryByDate(LocalDate date) {
         try {
             return salaryRepository.findSalariesByReceiveDate(date).stream()
@@ -113,6 +119,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryShortInfoDto> findSalaryByPersonnelId(Integer personnelId) {
         Personnel personnel = personnelRepository.findById(personnelId)
                 .orElseThrow(() -> new PersonnelException("Could not find personnel with id: " + personnelId));
@@ -131,6 +138,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findSalaryByMaxWorkedHours() {
         List<Salary> salaries = salaryRepository.findAll();
         if (salaries.isEmpty()) {
@@ -148,6 +156,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findSalaryByMinWorkedHours() {
         List<Salary> salaries = salaryRepository.findAll();
         if (salaries.isEmpty()) {
@@ -165,6 +174,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findSalaryByMaxWorkedHoursByDate(LocalDate dateMaxHours) {
         List<Salary> salaries = salaryRepository.findSalariesByReceiveDate(dateMaxHours);
         if (salaries.isEmpty()) {
@@ -182,6 +192,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findSalaryByMinWorkedHoursByDate(LocalDate dateMinHours) {
         List<Salary> salaries = salaryRepository.findSalariesByReceiveDate(dateMinHours);
         if (salaries.isEmpty()) {
@@ -199,6 +210,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findMaxSalary() {
         List<Salary> salaries = salaryRepository.findAll();
         if (salaries.isEmpty()) {
@@ -216,6 +228,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SalaryInfoDto> findMinSalary() {
         List<Salary> salaries = salaryRepository.findAll();
         if (salaries.isEmpty()) {

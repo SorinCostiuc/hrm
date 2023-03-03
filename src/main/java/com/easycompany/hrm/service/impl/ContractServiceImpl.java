@@ -11,12 +11,14 @@ import com.easycompany.hrm.repository.ContractRepository;
 import com.easycompany.hrm.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ContractServiceImpl implements ContractService {
     private final ContractRepository contractRepository;
 
@@ -34,6 +36,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public ContractInfoDto findContractById(Integer contractId) {
 
         return ContractConvertor.entityToInfoDto(contractRepository.findById(contractId)
@@ -59,6 +62,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ContractShortInfoDto> findContractByStartDate(LocalDate startDate) {
 
         return contractRepository.findByStartDate(startDate).stream().map(ContractConvertor::entityToShortInfoDto)
@@ -73,6 +77,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ContractShortInfoDto> findContractByEndDate(LocalDate endDate) {
 
         return contractRepository.findByEndDate(endDate).stream().map(ContractConvertor::entityToShortInfoDto)
@@ -87,6 +92,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ContractShortInfoDto> findContractByContractType(ContractType contractType) {
 
         return contractRepository.findByContractType(contractType).stream().map(ContractConvertor::entityToShortInfoDto)

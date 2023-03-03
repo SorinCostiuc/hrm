@@ -17,6 +17,7 @@ import com.easycompany.hrm.service.PersonnelService;
 import com.easycompany.hrm.utils.StatusChangeScheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class PersonnelServiceImpl implements PersonnelService {
     private final PersonnelRepository personnelRepository;
     private final ContractRepository contractRepository;
@@ -103,6 +105,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonnelInfoDto> findByName(String name) {
 
         return personnelRepository.findAll().stream().map(PersonnelConvertor::entityToInfoDto)
@@ -118,6 +121,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonnelShortInfoDto> findByStatus(Status status) {
 
         return personnelRepository.findByStatus(status).stream().map(PersonnelConvertor::entityToShortInfoDto)
@@ -132,6 +136,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PersonnelShortInfoDto> findByJobTitle(JobTitle jobTitle) {
 
         return personnelRepository.findByJobTitle(jobTitle).stream().map(PersonnelConvertor::entityToShortInfoDto)
@@ -146,6 +151,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PersonnelInfoDto findByCnp(Long cnp) {
         try {
             return PersonnelConvertor.entityToInfoDto(personnelRepository.findByCnp(cnp));
@@ -155,6 +161,7 @@ public class PersonnelServiceImpl implements PersonnelService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PersonnelInfoDto findById(Integer personnelId) {
 
         return PersonnelConvertor.entityToInfoDto(personnelRepository.findById(personnelId)
