@@ -70,7 +70,7 @@ public class ContractController {
         return ResponseEntity.ok(contractService.findContractByEndDate(contractEndDate));
     }
 
-    @GetMapping("/type")
+    @GetMapping("/type-search")
     public ResponseEntity<List<ContractShortInfoDto>> findByType(@RequestParam ContractType contractType) {
 
         return ResponseEntity.ok(contractService.findByType(contractType));
