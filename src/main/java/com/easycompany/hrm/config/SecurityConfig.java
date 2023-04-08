@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-// TODO: 27.03.2023 error handling for FORBIDDEN and NOT AUTHORIZED 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
