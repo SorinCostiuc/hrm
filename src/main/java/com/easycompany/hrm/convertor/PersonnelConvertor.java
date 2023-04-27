@@ -29,15 +29,9 @@ public class PersonnelConvertor {
         personnelInfoDto.setStatus(personnel.getStatus());
         personnelInfoDto.setJobTitle(personnel.getJobTitle());
         personnelInfoDto.setId(personnel.getId());
-//        if (personnel.getContract() != null) {
-//            personnelInfoDto.setContractShortInfoDto(ContractConvertor.entityToShortInfoDto(personnel.getContract()));
-//        }
-// TODO: 25.02.2023 de verificat asta in postman
         personnelInfoDto.setContractShortInfoDto(
                 personnel.getContract() != null
                         ? ContractConvertor.entityToShortInfoDto(personnel.getContract()) : null);
-
-        // TODO: 25.02.2023 not return field if it's null
 
         return personnelInfoDto;
     }

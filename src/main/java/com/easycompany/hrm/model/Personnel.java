@@ -27,6 +27,8 @@ public class Personnel {
     @OneToOne
     @JoinColumn(name = "contract_id")
     private Contract contract;
+
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
     private List<Salary> salaries;
 
@@ -101,5 +103,13 @@ public class Personnel {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public List<Salary> getSalaries() {
+        return salaries;
+    }
+
+    public void setSalaries(List<Salary> salaries) {
+        this.salaries = salaries;
     }
 }

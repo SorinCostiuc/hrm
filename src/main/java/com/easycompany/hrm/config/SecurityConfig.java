@@ -85,11 +85,6 @@ public class SecurityConfig {
             auth.requestMatchers("/hrm/v1/salaries/increase").hasRole(ROLE_POWER_USER);
 
 
-//            For THYMELEAF CONTROLLER
-//            auth.requestMatchers("/start").hasRole(ROLE_USER);
-//            auth.requestMatchers("/welcome").hasRole(ROLE_USER);
-//            auth.requestMatchers("/showAll").hasRole(ROLE_USER);
-
         }).httpBasic();
 
         httpSecurity.csrf()
